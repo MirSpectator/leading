@@ -1,0 +1,11 @@
+
+.zhuti_div{
+	height: 961px;
+	position: absolute;
+	left: 0;
+	background-attachment: fixed;
+	width: 100%;
+	background-repeat: no-repeat;
+	background-position: top center;
+	background-size: cover;
+}

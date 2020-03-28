@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<input type="file" id="fileInput"/>
+
+
+<script type="text/javascript" src="lib/jquery-2.2.1.js"></script>
+<script>
+    var fileInput = document.querySelector('#fileInput');
+
+
+
+    fileInput.onchange = function () {
+	       
+        var file = this.files[0];
+        if (!/image\/\w+/.test(file.type)) {/*可以把autio改成其他文件类型 比如 image*/
+              alert("只能选择音频文件")
+            return false;
+        }
+        console.log("文件"+file.type)/*文件类型*/
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function () {
+             var audioBlob=convertBase64UrlToBlob(reader.result,file.type)
+            /*request("audio",audioBlob)这里是我的ajax请求*/
+        };
+    };
+    
+     function convertBase64UrlToBlob(urlData,type){   /*转成二进制对象*/
+    var bytes=window.atob(urlData.split(',')[1]);      
+    var ab = new ArrayBuffer(bytes.length);  
+    var ia = new Uint8Array(ab);  
+    for (var i = 0; i < bytes.length; i++) {  
+        ia[i] = bytes.charCodeAt(i);  
+    }  
+    return new Blob( [ab] , {type : type});  
+    
+} 
+
+</script>
+	</body>
+</html>

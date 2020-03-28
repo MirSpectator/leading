@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script type="text/javascript" src="js/jquery-2.2.1.js" ></script>
+	<script type="text/jscript">
+		Vue.component('todo-item', {
+			props: ['todo'],
+			template: '<li>{{todo.text}}</li>'
+		})
+	</script>
+	<style type="text/css">
+		.none {
+			display: none;
+		}
+		
+		.black {
+			display: block;
+		}
+		
+		.bank {
+			display: flex;
+		}
+		
+		.banks {
+			display: none;
+		}
+		
+		.arrow {
+			width: 20px;
+			height: 10px;
+			background-color: black;
+		}
+	</style>
+
+	<body>
+		<div id="app" v-bind:title="title" v-bind:class="cl" v-bind:align="center">
+			{{message}}
+			<h6 v-html="href"></h6>
+			<h5></h5>
+			<div>
+				<p>{{ints*0.03}}</p>
+				<input v-model="ints" />
+			</div>
+			<div>
+				<p>{{p}}</p>
+				<button v-on:click="rever">逆转</button>
+			</div>
+
+			<div>
+				<div class="bank" v-for="item in div_bank">
+					<div>{{item.name}}</div>
+					<div>{{item.age}} </div>
+					<div>{{item.height}}</div>
+					<div>{{item.weight}}</div>
+					<div class="arrow" v-on:click="div_click"></div>
+				</div>
+				<div v-for="item in s">
+					<div v-on:click="input_click" v-bind:class="div_class" v-bind:id="item.id">
+						<div>{{item.name}}</div>
+						<div>{{item.age}} </div>
+						<div>{{item.height}}</div>
+						<div>{{item.weight}}</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="solitude">
+			<ol>
+				<todo-item v-for="item in groceryList" v-bind:todo="item" v-bind:key="item.id"></todo-item>
+			</ol>
+		</div>
+
+		<div id="Apptime">
+			<div v-show="false">{{listtime}}</div>
+			<div v-for="item in list">
+				<div>{{item.text}}</div>
+				<div>{{time(item.startdate,item.day)}}</div>
+			</div>
+		</div>
+	
+	    <div id="formSum">
+	    	<button v-on:click="formAdd">添加</button>
+	        <button v-on:click="get">访问接口</button>
+	    	<table border="0" cellspacing="0" cellpadding="0" class="table-all">
+					<tr>
+						<th>日期</th>
+						<th>金额</th>
+						<th>批次</th>
+						<th>备注</th>
+					</tr>
+					<tr v-for="item in list">
+						<td><input v-model="item.fund_details_date"></input></td>
+						<td><input v-model="item.fund_details_money"></input></td>
+						<td><input v-model="item.fund_details_batch"></input></td>
+						<td><input v-model="item.fund_details_text"></input></td>
+					</tr>
+				</table>
+	    </div>
+	    	
+	    <div id="A">
+	    	<button v-on:click="baocun">你好</button>
+	    	<div v-for="item in lista">
+	    		<input v-model="item.a"  />
+	    		<input v-model="item.b"  />
+	    	</div>
+	    </div>
+	    <div id="B"></div>
+	    
+	    
+	</body>
+	<script type="text/javascript">
+
+        var listAB=[]
+
+		var A =new Vue({
+			el:"#A",
+			data:{
+				lista:[
+
+				],
+				list:[
+				
+				]
+			},
+	        
+			methods:{
+				
+				s:function(){
+					return "123"
+				},
+				
+				baocun:function(){
+					
+					var s =this.s()
+					console.log(s)
+					
+					
+				},
+				
+			},
+	created(){
+		
+	        var date =new Date();
+			var m = date.getMonth() + 2;
+			var y=date.getFullYear()+1
+			var dates= y+ '-' + m + '-' + date.getDate();
+		    console.log("------------------"+dates)
+		    
+		    
+		    
+		
+		
+		
+		
+		
+				var s =[
+				{"a":"1","b":"2"}
+				]
+					this.lista=s
+					listAB=this.lista
+					this.list=s
+					
+					
+					const listC=this.lista
+					console.log(this.lista[0])
+					console.log(listAB[0])
+					console.log(this.list[0])
+				}
+			
+		})
+	 
+	</script>
+	
+	
+	
+	
+    <script type="text/javascript">
+    	var formSum=new Vue({
+    		el:"#formSum",
+    		data:{
+    			list:[
+    			{"fund_details_date":"1","fund_details_money":"2","fund_details_batch":"3","fund_details_text":"4"},
+    			{"fund_details_date":"a","fund_details_money":"b","fund_details_batch":"c","fund_details_text":"d"}
+    			]
+    		},
+    		methods:{
+    			formAdd:function(){
+    				for(var index in this.list){
+    				console.log("添加之前的内容"+this.list[index].a)	
+    				}
+    				var s ={fund_details_date:"a",fund_details_money:"b",fund_details_batch:"c",fund_details_text:"d"}
+    				this.list.push(s)
+    			},
+    			get:function(){
+    				console.log(this.list)
+    			$.ajax({
+    				type:"POST",
+    				url:"http://localhost:8080/YiNuo/fund/Add_Fund",
+    				async:true,
+    				data:{
+    					fund_customer_id:42,
+    					fund_workyard_pact_id:2,
+    					fund_debtor:"张三",
+    					fund_name:"工程款2",
+    					fund_money:22200,
+    					fund_person:"李四",
+    					fund_text:"没有备注",
+                        fund_type:"阶段收款",
+    					listFund:JSON.stringify(this.list)
+    				},
+    				success:function(res){
+    					console.log("访问成功")
+    					console.log(res.data)
+    				},
+    				error:function(){
+    					console.log("访问接口失败")
+    				}
+    			});
+    			}
+    		}
+    	})
+    	
+    </script>
+
+
+	<script type="text/javascript">
+		var apptime = new Vue({
+			el: '#Apptime',
+			data: {
+				listtime:"123456",
+				list: [{
+						text: '第一个',
+						startdate: '2019/04/26 18:00',
+						day: 2
+					},
+					{
+						text: '第二个',
+						startdate: '2019/04/26 18:00',
+						day: 3
+					},
+					{
+						text: '第三个',
+						startdate: '2019/04/26 18:00',
+						day: 1
+					}
+				]
+			},
+			
+			created(){	
+				
+				
+				
+				 setInterval( () => {
+				 	var a =new Date()
+					this.listtime=a
+			
+                    }, 1000)
+				
+				
+				
+				
+                	
+			},
+	     
+	 
+	
+	
+			methods: {
+			
+				time: function(date, day) {
+						var startDate = new Date(date);
+						startDate.setDate(startDate.getDate() + day);
+						var m = startDate.getMonth() + 1;
+						var end = startDate.getFullYear() + '-' + m + '-' + startDate.getDate() + "-" + startDate.getHours() + ":" + startDate.getMinutes() + ":" + startDate.getSeconds();
+						var endDate = new Date(end)
+						var start = new Date()
+						var rightTime = endDate - start; //截止时间减去当前时间
+						if(rightTime > 0) { //判断剩余倒计时时间如果大于0就执行倒计时否则就结束
+							var dd = Math.floor(rightTime / 1000 / 60 / 60 / 24);
+							var hh = Math.floor((rightTime / 1000 / 60 / 60) % 24);
+							var mm = Math.floor((rightTime / 1000 / 60) % 60);
+							var ss = Math.floor((rightTime / 1000) % 60);
+							var showTime = dd + "天" + hh + "小时" + mm + "分" + ss + "秒"
+							// this.MerchantDemandList.status=1
+						} else {
+							var showTime = "预约已结束"
+							// this.MerchantDemandList.status=0
+						}
+						return showTime
+				},
+				
+			}
+
+		})
+	</script>
+
+	<script type="text/javascript">
+		var app = new Vue({
+			el: '#app',
+			data: {
+				div_class: "bank",
+				s: [{
+						id: 0,
+						name: "1",
+						age: "2",
+						height: "3",
+						weight: "4"
+					},
+					{
+						id: 1,
+						name: "a",
+						age: "b",
+						height: "c",
+						weight: "d"
+					}
+				],
+				p: "喜欢的少年是你",
+				ints: 2,
+				href: "<a href='http://www.baidu.com'>你好</a>",
+				center: "center",
+				cl: "black",
+				title: "vue测试",
+				message: "hello Vue",
+				div_bank: [{
+					id: 0,
+					name: "户主",
+					age: "开户行",
+					height: "余额",
+					weight: "尾号"
+				}],
+			},
+			methods: {
+				rever: function() {
+					this.p = this.p.split('').reverse().join('')
+				},
+				div_click: function() {
+					if(this.div_class === "bank") {
+						this.div_class = "banks"
+					} else {
+						this.div_class = "bank"
+					}
+				},
+				input_click: function(event) {
+					var e = event.currentTarget;
+					var status = e.id;
+					this.div_bank = [];
+					this.div_bank.push(this.s[status])
+					console.log(this.div_bank)
+				}
+
+			}
+
+		})
+
+		var solitude = new Vue({
+			el: '#solitude',
+			data: {
+				groceryList: [{
+						id: 0,
+						text: '蔬菜'
+					},
+					{
+						id: 1,
+						text: '奶酪'
+					},
+					{
+						id: 2,
+						text: '随便其它什么人吃的东西'
+					}
+				]
+			}
+		})
+	</script>
+	
+	
+
+</html>

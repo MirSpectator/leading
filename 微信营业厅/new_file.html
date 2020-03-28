@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			.addBorder{
+    border:1px solid #ccc;
+}
+ 
+#imgDiv{
+    width:100px;
+    height:100px;
+}
+ 
+#imgContent{
+    width: 100%;
+    height:100%;
+}
+		</style>
+	</head>
+	<body>
+		<form id="imgForm">
+    <input type="file" class="addBorder">
+    <br/>
+    <button type="button" onclick="loadImg()">获取图片</button>
+</form>
+ 
+<div class="addBorder" id="imgDiv">
+    <img id="imgContent">
+</div>
+
+<script>
+	
+function loadImg(){
+    //获取文件
+    var file = $("#imgForm").find("input")[0].files[0];
+ 
+    //创建读取文件的对象
+    var reader = new FileReader();
+ 
+    //创建文件读取相关的变量
+    var imgFile;
+ 
+    //为文件读取成功设置事件
+    reader.onload=function(e) {
+        alert('文件读取完成');
+        imgFile = e.target.result;
+        console.log("图片二进制内容"+imgFile);
+        $("#imgContent").attr('src', imgFile);
+    };
+ 
+    //正式读取文件
+    reader.readAsDataURL(file);
+}
+</script>
+    <script type="text/javascript" src="lib/js/jquery-2.2.1.js" ></script>
+	</body>
+</html>

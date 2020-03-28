@@ -1,0 +1,131 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
+<!DOCTYPE HTML >
+<html>
+  <head>
+    <base href="<%=basePath%>">
+    
+    <title>userManager</title>
+    
+
+  </head>
+  <link rel="stylesheet"  href="css/font-awesome.css" />
+  <link rel="stylesheet" href="css/table.css"/>
+  <link rel="stylesheet" href="css/common.css"/>
+  <link rel="stylesheet" href="css/ddl.css"/>
+  <link rel="stylesheet" href="css/goodsManager.css"/>
+  <script src="jquery-2.2.1.js"></script>
+  <script src="js/common/table.js"></script>
+  <script src="js/common/ddl.js"></script>
+  <script src="js/manager/userManager.js"></script>
+  
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<style type="text/css">
+		body, html{width: 100%;height: 100%;margin:0;font-family:"微软雅黑";}
+		#allmap{height:500px;width:100%;}
+		#r-result{width:100%; font-size:14px;}
+	</style>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=iOmG234gIdKMaRkVNWbMfW4kw01el3Nz"></script>
+	<title>城市名定位</title>
+  <body>
+  	<div class="searchUser">
+  		<div class="button">
+  			<span>信息搜索</span>
+  		</div>
+  		<!-- 查询条件 -->
+		<div class="manager search-input">
+			
+	    	<div class="line">
+    			<label class="input-title">发送器选择：</label>
+	    		<div id="sex"></div>
+	    	</div>
+	    	
+	    </diV>	
+	</div>
+<button onclick="myStopFunction()">停止时间</button>
+    <div id="allmap"></div>
+	<div id="r-result">
+		经度: <input id="longitude" type="text" style="width:100px; margin-right:10px;" />
+		纬度: <input id="latitude" type="text" style="width:100px; margin-right:10px;" />
+		<input type="button" value="查询" onclick="theLocation()" />
+	</div>
+    
+  </body>
+  
+ 
+  	
+</html>
+<script type="text/javascript">
+	// 百度地图API功能
+	var map = new BMap.Map("allmap");
+	map.centerAndZoom(new BMap.Point(116.331398,39.897445),11);
+	map.enableScrollWheelZoom(true);
+	
+	// 用经纬度设置地图中心点
+	function theLocation(a,b){
+		if(document.getElementById("longitude").value != "" && document.getElementById("latitude").value != ""){
+			map.clearOverlays(); 
+			var new_point = new BMap.Point(document.getElementById("longitude").value,document.getElementById("latitude").value);
+			var marker = new BMap.Marker(new_point);  // 创建标注
+			map.addOverlay(marker);              // 将标注添加到地图中
+			map.panTo(new_point);      
+		}else if(a !=null && b !=null){
+			map.clearOverlays();
+			var new_point = new BMap.Point(a,b);
+			var marker = new BMap.Marker(new_point);  // 创建标注
+			map.addOverlay(marker);              // 将标注添加到地图中
+			map.panTo(new_point);     
+		}
+	}
+
+           //定时获取数据库的位置信息 页面加载事件 
+		$(document).ready(function(){
+			 // 开始写 jQuery 代码...
+            time();
+        });
+		//定时器
+		function time (){  setInterval(function(){
+			con()
+		}, 1000);
+		}
+		function con() {
+			console.log(123)
+		};
+		function myStopFunction() {
+		    clearInterval(time);
+		}
+		
+		//ajax 访问后台获取数据
+		function getAjax(){
+           var date  = new Date();
+		   console.log(date);
+		   $.ajax({
+		    url:"address.action",
+			data:{
+				id:"1",
+				userid:"456"
+			},
+			success:function(res){
+				console.log("访问成功,拿到的数据是---");
+				
+				var str = res.data.message;
+				var strs = str.split(",");
+				console.log(strs[2]);
+				console.log(strs[4]);
+				var a = 118.703593;
+				var b= 32.168864;
+				theLocation(a,b);
+				
+			},
+			error:function(res){
+				console.log("访问失败,返回的数据是---");
+				console.log(res);
+			}
+		   });		   
+		} 
+</script>

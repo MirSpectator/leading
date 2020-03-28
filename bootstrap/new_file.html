@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<script type="text/javascript" src="lib/jquery-2.2.1.js" ></script>
+	<body>
+		<form name="Form2" action="" method="post" enctype="multipart/form-data" >
+     <input type="file" id="typeCodeFile" name="typeCodeFile" multiple="multiple"/>
+     <input type="submit" onclick="get()" value="上传"/> 
+</form>
+<script type="text/javascript">
+	function get(){
+		var fileObj=document.getElementById("typeCodeFile").files[0]
+	  var formFile = new FormData();
+          formFile.append("file", fileObj); //加入文件对
+          console.log(fileObj)
+	  $.ajax({
+              url: "http://www.zzzswlw.com/upload.do",
+              data: formFile,
+              type: "post",
+              dataType: "json",
+              cache: false,//上传文件无需缓存
+              async: false,
+              processData: false,//用于对data参数进行序列化处理 这里必须false
+              contentType: false, //必须
+              success: function (res) {
+              	console.log(res.data)
+            	  if(res.status==1){
+            	  
+            	  }else{
+            	  alert("上传图片错误!");
+            	  return false;
+            	  }
+              }
+          })
+	}
+	
+</script>
+	</body>
+</html>

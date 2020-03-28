@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title></title>
+		<style type="text/css">
+			.con{
+  width: 60%;
+  position: relative;
+  margin: 0 auto;
+}
+.btns{
+  width: 30px;
+  height: 30px;
+  background: red;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.btns:first-child{
+  left:0; 
+}
+.btns:last-child{
+  right: 0;
+}
+#ch{
+  width: 600px;
+  height: 200px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+ul{
+  width: auto;
+  height: 100%;
+  position: relative;
+  transition: all 0.3s linear;
+}
+ul li{
+  width: 200px;
+  height: 100%;
+  float: left;
+  margin: 0;
+}
+
+
+		</style>
+	</head>
+	<body>
+<div class="con">
+      <div id="ch">
+          <ul>
+              <li style="background:red">1<>
+              <li style="background:purple">2<>
+              <li style="background:yellow">3<>
+          </ul>
+      </div>
+      <div class="btns" id="left"><</div>
+      <div class="btns" id="right">></div>  
+    </div>
+	</body>
+	<script type="text/javascript">
+		var box=document.getElementById('ch');
+    var ul=box.getElementsByTagName('ul')[0];
+    var left=document.getElementById('left');
+    var right=document.getElementById('right');
+    var li=ul.getElementsByTagName('li');
+    var width=li[0].offsetWidth;
+    var i=0;
+    ul.innerHTML+=ul.innerHTML;
+    ul.style="width:"+width*li.length+"px";
+    left.onclick=function(){
+      i++;
+      if(i>=li.length/2){
+        i=0
+      }
+      ul.style.left=-i*width+'px';
+    }
+    right.onclick=function(){
+      i--;
+      if(i<=0){
+        i=li.length/2;
+      }
+      ul.style.left=-i*width+'px';
+    }
+
+	</script>
+</html>

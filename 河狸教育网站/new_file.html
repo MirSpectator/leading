@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+  2 <html lang="zh-CN">
+  3   <head>
+  4     <meta charset="utf-8">
+  5     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  6     <meta name="viewport" content="width=device-width, initial-scale=1">
+  7     <title>Bootstrap 轮播图</title>
+  8     <link href="lib/css/bootstrap.css" rel="stylesheet">
+  9     <!--[if lt IE 9]>
+ 10       <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+ 11       <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+ 12     <![endif]-->
+ 13     
+ 14     <style>
+ 15       img {
+ 16         width: 100%;
+ 17         height: 100%;
+ 18       }
+ 19       p {
+ 20         text-align: center;
+ 21       }
+ 22     </style>
+ 23   </head>
+ 24   <body>
+ 25     <!-- 轮播图部分 -->
+ 26     <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+ 27       <!-- Indicators -->
+ 28       <!-- 指示器 -->
+ 29       <ol class="carousel-indicators">
+ 30         <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+ 31         <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+ 32         <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+ 33       </ol>
+ 34 
+ 35       <!-- Wrapper for slides -->
+ 36       <!-- 包裹幻灯片 -->
+ 37       <div class="carousel-inner" role="listbox">
+ 38         <div class="item active">
+ 39           <img src="img/首页1.jpg" alt="轮播图1">
+ 40           <div class="carousel-caption">
+ 41             轮播图1
+ 42           </div>
+ 43         </div>
+ 44         <div class="item">
+ 45           <img src="img/首页2.jpg" alt="轮播图2">
+ 46           <div class="carousel-caption">
+ 47             轮播图2
+ 48           </div>
+ 49         </div>
+ 50         <div class="item">
+ 51           <img src="img/首页3.jpg" alt="轮播图3">
+ 52           <div class="carousel-caption">
+ 53             轮播图3
+ 54           </div>
+ 55         </div>
+ 56         <p>轮播图尝试</p>
+ 57       </div>
+ 58 
+ 59       <!-- Controls -->
+ 60       <!-- 控制 -->
+ 61       <!-- 向左滑动 -->
+ 62       <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+ 63         <span class="glyphicon glyphicon-chevron-left" aria-hidden="false"></span>
+ 64         <span class="sr-only">Previous</span>
+ 65       </a>
+ 66       <!-- 向右滑动 -->
+ 67       <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+ 68         <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+ 69         <span class="sr-only">Next</span>
+ 70       </a>
+ 71     </div>
+ 72 
+ 73     <!-- js控制轮播图 -->
+ 74     <button id="prev">向前</button>
+ 75     <button id="next">向后</button>
+ 76     <button id="pause">停止</button>
+ 77     <button id="start">开始</button>
+ 78     <button id="jump">到第二张</button>
+ 79 
+ 80     <script src="lib/jquery-2.2.1.js"></script>
+ 81     <script src="lib/js/bootstrap.js"></script>
+ 82     <!-- 轮播图还支持js控制 -->
+ 83     <script>
+ 84       $(function(){
+ 85         $('.carousel').carousel({
+ 86           interval: 2000,//轮播间隔
+ 87           pause:"hover", //鼠标悬停在轮播图上，是否停止滚动
+ 88           wrap:true,     //
+ 89           keyboard:true  //响应键盘事件
+ 90         });
+ 91 
+ 92         $("#prev").click(function(event) {
+ 93           $('.carousel').carousel('prev')// 周期上一个项目。
+ 94         });
+ 95 
+ 96         $("#next").click(function(event) {
+ 97           $('.carousel').carousel('next')// 周期到下一个项目。
+ 98         });;
+ 99 
+100         $("#pause").click(function(event) {
+101           $('.carousel').carousel('pause')// 从通过项目循环停止传送带。
+102         });;
+103 
+104         $("#start").click(function(event) {
+105           $('.carousel').carousel('cycle')// 通过传送带项目周期从左到右。
+106         });;
+107 
+108         $("#jump").click(function(event) {
+109           $('.carousel').carousel(1)// 循环传送带到一个特定的帧（0为主，类似于数组）。
+110         });;
+111 
+112 
+113 
+114       });
+115     </script>
+116   </body>
+117 </html>

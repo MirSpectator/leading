@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+	<body>
+		<div id="bank_form">
+           <div>开户行: <input v-model="bank_bank"/></div>			
+		   <div>户主: <input v-model="bank_person"/></div>	
+		   <div>卡号: <input v-model="bank_nunmber"/></div>	
+		   <div>类型: <input v-model="bank_type"/></div>
+		   <div>余额: <input v-model="bank_money"/></div>	
+		   <div>额度: <input v-model="bank_limit"/></div>
+		   <button v-on:click="go">添加</button>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var app =new Vue({
+			el:"#bank_form",
+			data:{
+				bank_bank:'',
+				bank_person:'',
+				bank_nunmber:'',
+				bank_type:'',
+				bank_money:'',
+				bank_limit:''
+			},
+			methods:{
+				go:function(){
+					  this.$http.get('/try/ajax/ajax_info.txt').then(function(res){
+                    document.write(res.body);    
+                },function(){
+                    console.log('请求失败处理');
+                });
+				}
+			}
+			
+		})
+		
+	</script>
+</html>

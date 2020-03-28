@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<script src="../js/jquery-2.2.1.js"></script>
+	<body>
+		
+		<div id="tiaozhuan">访问接口</div>
+		
+		<script type="text/javascript">
+			$(document).ready(function(){
+		//开始写js代码
+		$("#tiaozhuan").click(function(){
+			var list= {
+				user_password:"123456",
+				user_name:"测试数据",
+				user_account:"银行卡账户",
+			    user_sex:"男",
+				user_headimg:"暂无头像",
+				user_vip:"普通会员",
+				user_balance:25.23,
+				user_phone:"13014786999",
+			}
+			$.ajax({
+				type:"post",
+				url:"http://127.0.0.1:8080/YiNuo//DaiShu/user/Add_user",
+				data:{
+					jsonUser:JSON.stringify(list)
+					},
+				async:true,
+				success:function(e){
+					console.log("访问成功"+e.data)
+				},
+				error:function(e){
+					console.log("访问失败"+e.status+"------"+e.statusText)
+				}
+				
+			});
+		})
+	})
+		</script>
+	</body>
+</html>

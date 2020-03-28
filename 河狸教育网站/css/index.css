@@ -1,0 +1,40 @@
+.navbar-default input[type="text"]{
+	background-color: #F8F8F8;
+	border: none;
+	color: black;
+}
+.navbar-default button[type="submit"]{
+	background: none;
+	border: none;
+	color: #999;
+}
+.navbar-brand{
+	margin-right: 10%;
+}    
+img {
+				width: 100%;
+				height: 100%;
+			}
+.carousel{
+	margin-top: 2%;
+}
+.et_parallax_bg {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top center;
+}		
+.et_pb_parallax_css{
+	background-attachment: fixed;
+}
+.et_pb_section_1,.et_pb_section_2,.et_pb_section_3,.et_pb_section_4,.et_pb_section_5 {
+
+    padding-right: 0px;
+    padding-bottom: 460px;
+    padding-left: 0px;
+    margin-top: -40px;
+
+}

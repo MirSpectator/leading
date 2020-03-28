@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<base href=" http://www.zzzswlw.com:80/">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>管理中心</title>
+
+<!-- Bootstrap core CSS -->
+<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+
+<style type="text/css">
+select option:checked {
+	background: #000;
+	color: #0ff;
+}
+</style>
+</head>
+<body class="container-fluid">
+	<div class="row">
+		<div class="col-sm-12 col-lg-8">
+					<div style="height: 50px;padding-top: 10px">
+						<a href="typeCode/typeList.do" style="font-weight:bold; text-decoration:underline;color:#333">
+							<font size="2px">查看品种信息</font>
+						</a>
+					</div>
+					
+					<div class="panel panel-primary">
+						<div class="panel-heading">
+							<h3 class="panel-title">品种：</h3>
+						</div>
+						<div class="panel-body">
+							<form class="form-inline" id="uploadForm" enctype="multipart/form-data">
+								<div class="form-group">
+									<input type="file" id ="typeCodeFile" name="typeCodeFile" />
+								</div>
+								<button type="button" id="btn1">提交</button>
+							</form>
+						</div>
+					</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-12 col-lg-8">
+					<div class="panel panel-primary">
+							<div class="panel-heading">
+								<h3 class="panel-title">品种信息：</h3>
+							</div>
+							<div class="panel-body">
+										<form class="form-horizontal" id="typeCodeInfoForm">
+										
+											<div class="form-group">
+												<div class="col-sm-4">
+													<div class="col-xs-5">
+														<label>请选择品种</label>
+													</div>
+													<div class="col-xs-7">
+														<select class="form-control" id="typeCode" name="typeCode"></select>
+													</div>
+												</div>
+												<div class="col-sm-4">
+													<div class="col-xs-5">
+														<label>净含量</label>
+													</div>
+													<div class="col-xs-7">
+														<input class="form-control" type="text"  id="net_content" name="net_content" placeholder="单位:g">
+													</div>
+												</div>
+												<div class="col-sm-4">
+													<div class="col-xs-5">
+														<label>保质期</label>
+													</div>
+													<div class="col-xs-7">
+														<input class="form-control" type="text"  id="shelf_life" name="shelf_life" placeholder="单位:月">
+													</div>
+												</div>
+											</div>
+											
+											<div class="form-group">
+												<div class="col-sm-4">
+													<div class="col-xs-5">
+														<label>产品标准代号</label>
+													</div>
+													<div class="col-xs-7">
+														<input  class="form-control" type="text"  id="product_code" name="product_code" >
+													</div>
+												</div>
+												<div class="col-sm-4">
+													<div class="col-xs-5">
+														<label>产品类别</label>
+													</div>
+													<div class="col-xs-7">
+														<input  class="form-control" type="text" id="product_type" name="product_type" >
+													</div>
+												</div>
+												<div class="col-sm-4">
+													<div class="col-xs-5">
+														<label>产品状态</label>
+													</div>
+													<div class="col-xs-7">
+														<input class="form-control" type="text"  id="product_stutas" name="product_stutas" >
+													</div>
+												</div>
+											</div>
+											
+											
+											<div class="form-group">
+												<div class="col-sm-4 ">
+													<div class="col-xs-5">
+														<label>储存条件</label>
+													</div>
+													<div class="col-xs-7">
+														<input  class="form-control" type="text" id="storage_conditions" name="storage_conditions" >
+													</div>
+												</div>
+												<div class="col-sm-4 ">
+													<div class="col-xs-5">
+														<label>产地</label>
+													</div>
+													<div class="col-xs-7">
+														<input  class="form-control" type="text" id="product_address" name="product_address" >
+													</div>
+												</div>
+												<div class="col-sm-4 ">
+													<div class="col-xs-5">
+														<label>原料说明</label>
+													</div>
+													<div class="col-xs-7">
+														<input  class="form-control" type="text" id="material_explain" name="material_explain" >
+													</div>
+												</div>
+								
+											</div>
+											<div class="form-group">
+												<div class="col-sm-4">
+													<div class="col-xs-5">
+														<label>其他质量承诺</label>
+													</div>
+													<div class="col-xs-7">
+														<input  class="form-control" type="text" id="other_promise" name="other_promise" >
+													</div>
+												</div>
+											</div>
+											
+											
+											<div class="row" style="margin-top: 10px;">
+												<div class="col-xs-12 col-md-2 ">
+													<label for="date">主要营养成分</label>
+												</div>
+												<div class="col-xs-12 col-md-10 ">
+													<textarea class="form-control" name="main_nutritional" rows="7" cols="120"  placeholder="最少15个字"></textarea>
+												</div>
+											</div>
+											
+											<div class="row">
+												<div class="col-xs-12 col-md-2">
+													<label for="date">配料表</label>
+												</div>
+												<div class="col-xs-12 col-md-10">
+													<textarea class="form-control" name="ingredients" rows="7" cols="120" placeholder="最少15个字"></textarea>
+												</div>
+											</div>
+											
+											<div align="center">
+												<button type="button" id="btn2" class="btn btn-default">提交</button>
+											</div>
+										</form>
+							</div>
+					</div>
+		</div>
+	</div>
+		
+	<!-- 模态框（Modal） -->
+	<div class="modal fade" id="myModal" role="dialog" style="top: 20%;">
+	    <div class="modal-dialog">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	                <h4 class="modal-title" id="myModalLabel">提示信息</h4>
+	            </div>
+	            <div class="modal-body">
+	            	<p id="msg"></p>
+	            </div>
+	            <div class="modal-footer">
+	                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+	            </div>
+	        </div><!-- /.modal-content -->
+	    </div><!-- /.modal -->
+	</div>
+	
+</body>
+
+<script type="text/javascript">
+	document.onkeydown = function() {
+		/*
+		(ctrlKey == true && keyCode == 82)   Ctrl+R   ---刷新
+		(keyCode == 116)                     F5       ---刷新
+		(ctrlKey == true && keyCode == 116)  Ctrl+F5  ---强制刷新
+		 */
+		//window.alert(event.keyCode);
+		var k = event.keyCode;
+		if ((event.ctrlKey == true && k == 82) || (k == 116)
+				|| (event.ctrlKey == true && k == 116)) {
+			//return (window.confirm("关闭?"));
+			event.keyCode = 0;
+			event.returnValue = false;
+			event.cancelBubble = true;
+		}
+	}
+
+	function select() {
+			$.ajax({
+				url : "typeCode/findTypeCodeList.do",
+				type : "get",
+				dataType : "json",
+				async:true,
+				success : function(res) {
+					if (res.status==1) {
+						var arrayOptions = res.data;
+						for (var i = 0; i < arrayOptions.length; i++) {
+							$("#typeCode").append('<option  value="'+arrayOptions[i].typeCode+'">'+ arrayOptions[i].food_name+ '</option>');
+						}
+					} else {
+						alert("查询错误");
+					}
+				}
+			});
+	}
+	//初始化调用一次。
+	select();
+
+	$.fn.serializeObject = function() {
+		var o = {};
+		var a = this.serializeArray();
+		$.each(a, function() {
+			if (o[this.name]) {
+				if (!o[this.name].push) {
+					o[this.name] = [ o[this.name] ];
+				}
+				o[this.name].push(this.value || '');
+			} else {
+				o[this.name] = this.value || '';
+			}
+		});
+		return o;
+	};
+	
+	$("#btn1").click(function() {
+		 var fileObj = document.getElementById("typeCodeFile").files[0]; // js 获取文件对象
+         if (typeof (fileObj) == "undefined" || fileObj.size <= 0) {
+             alert("请选择文件");
+             return;
+         }
+		  
+         var formFile = new FormData();
+         formFile.append("typeCodeFile", fileObj); //加入文件对象
+	
+			
+			//var formData = new FormData($("#uploadForm")[0]);
+			$.ajax({
+			  url: "http://www.zzzswlw.com/typeCode/fileUpload.do",
+              data: formFile,
+              type: "post",
+              dataType: "json",
+              cache: false,//上传文件无需缓存
+              async: false,
+              processData: false,//用于对data参数进行序列化处理 这里必须false
+              contentType: false, //必须
+              success: function (res) {
+              	console.log(res.data)
+					if (res.status==1) {
+						 $("#typeCode").empty();
+						 select();
+						 $("body").mLoading("hide");
+							
+						 $('#msg').text("提交成功");
+		        		 $('#myModal').modal({backdrop: true});
+					} else {
+						 $("body").mLoading("hide");
+						 $('#msg').html(res.msg);
+		        		 $('#myModal').modal({backdrop: true});
+					}
+				}
+			});
+	});
+	
+	$("#btn2").click(function() {
+			var objData = $("#typeCodeInfoForm").serializeObject();
+			objData.food_name=$("#typeCode").find("option:selected").text();
+			
+			$("#btn2").text("提交中请稍后");
+			$("#btn2").attr('disabled',true);
+			$.ajax({
+				url : "typeCodeInfo/save.do",
+				data : JSON.stringify(objData),
+				type : "POST",
+				dataType : "json",
+				contentType:"application/json",
+				success : function(res) {
+					$("#btn2").text("提交");
+					$("#btn2").removeAttr("disabled");
+					if (res.status==1) {
+						 $('#msg').text("提交成功");
+		        		 $('#myModal').modal({backdrop: true});
+					} else {
+						 $('#msg').text("提交失败");
+		        		 $('#myModal').modal({backdrop: true});
+					}
+				},
+			});
+	});
+</script>
+</html>

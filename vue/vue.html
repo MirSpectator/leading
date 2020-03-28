@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/vue-resource.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		
+		<div id="app">
+			<input type="text" v-model="name"/>
+		    <button v-on:click="add"></button>
+		</div>
+		
+		<script type="text/javascript">
+			var app = new Vue({
+				el:'#app',
+				data:{
+					name:'',
+					list: [{
+						"fund_details_date":"2019-06-07",
+						"fund_details_money":"1234",
+						"fund_details_batch":"2",
+					"fund_details_text":"达瓦"}],
+					bank:{"customer_id":1,"fund_person_id":1,"fund_name_id":16,"fund_money":123,"fund_text":"123","fund_detail_text":"123","fund_detail_transaction_text":"123","fund_detail_money":123,"fund_detail_transaction_money":123,"fund_detail_transaction_bank_id":2,"fund_date":"2014-01-01 00:00:00","fund_detail_date":"2014-01-01 00:00:00","fund_detail_transaction_date":"2014-01-01 00:00:00"}
+				},
+				methods:{
+					add(){
+						var s = JSON.stringify(this.bank);
+						console.log(s);
+						var ss = "http://localhost:8080/YiNuoFund/fund/out_Enter.po?jsonBank="+s;
+						console.log(ss);
+						this.$http.post(ss).then(res=>{
+							console.log(res);
+						})
+					}
+					/* add(){
+					var a=JSON.stringify(this.list)
+					var add = '?listFund='+JSON.stringify(this.list)+'&fund_customer_id=0'+
+						'&fund_workyard_pact_id=0'+'&fund_debtor='+"张三"+
+						'&fund_name='+"借款"+'&fund_money='+500+
+						'&fund_person=5'+'&fund_text='+"无备注"+'&fund_type='+"阶段付款"
+						console.log(add)
+						this.$http.post('http://localhost:8080/YiNuo/fund/Add_Fund'+add).then(res=>{
+							console.log(res.data)
+						})
+						
+					} */
+				}
+			})
+		</script>
+	</body>
+</html>

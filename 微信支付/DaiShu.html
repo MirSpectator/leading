@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>袋鼠帮帮微信支付测试</title>
+	</head>
+	<script src="https://formattingclub.com/js/jquery-2.2.1.js"></script>
+	<body>
+		<button onclick="s" id="ready">调起微信进行下单</button>
+		<div ></div>
+	</body>
+	<script type="text/javascript">
+		
+		
+		
+		/*
+		$(document).ready(function(){
+			 var r = window.location;  //匹配目标参数
+			 console.log("===="+r.href+"===")
+            var s = r.split("=")
+            var address =  decodeURIComponent(s[1])
+            alert("1111111"+s[1])
+            alert("22222"+address)
+			/*var   s  = "漯河市郾城区致悦酒店";
+			var ss ="https://formattingclub.com/DaiShu/zfxq?address="+encodeURIComponent(s)
+			 
+             //匹配目标参数
+            var r = ss.split("=")
+            alert(r[1])
+            
+			 
+			 
+			 
+			 
+			 alert(decodeURIComponent(ss))*/
+		 
+		});
+		
+		
+		/*$.ajax({
+					type:"get",
+					url:"https://api.mch.weixin.qq.com/pay/unifiedorder",
+					async:true,
+					data:{
+						appid:"wx14d0597e62faf8b6",//appid必选项
+						mch_id:"1540328151",//商户号必选项
+						nonce_str:"5K8264ILTKCH16CQ2502SI8ZNMTM67VS",//随机字符串 不长于32位  随机数生成算法
+						sign:"C380BEC2BFD727A4B6845133519F3AD6",//签名，签名生成算法
+						body:"微信支付测试",//商品描述
+						out_trade_no:"410324199910053713Wzp",//商户订单号
+						total_fee:0.01,//总金额
+						spbill_create_ip:"152.136.109.105",//用户端的ip
+						notify_url:"https://formattingclub.com/",//接收微信支付异步通知回调地址 通知url不能携带参数
+						trade_type:"MWEB",//交易类型   H5支付的交易类型是MWEB
+						scene_info:{"h5_info": //h5支付固定传"h5_info" 
+                                      {"type": "Wap",  //场景类型
+                                       "wap_url": "https://formattingclub.com/DaiShu.html",//WAP网站URL地址
+                                       "wap_name": "袋鼠帮帮微信支付测试"  //WAP 网站名
+                                       }
+                                   } 
+
+					}
+				});*/
+	</script>
+	
+</html>
+

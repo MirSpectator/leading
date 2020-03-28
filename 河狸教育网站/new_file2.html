@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  3   <head>
+  4     <meta charset="utf-8">
+  5     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  6     <meta name="viewport" content="width=device-width, initial-scale=1">
+  7     <title>移除百度地图的logo</title>
+  8     <link href="lib/css/bootstrap.css" rel="stylesheet">
+  9      <style type="text/css"> 
+.anchorBL{ 
+display:none; 
+} 
+</style> 
+ 79   
+ 15       
+ 23   </head>
+ 
+ 24   <body>
+ 	<input type="button" onclick="$('#map div.anchorBL').hide();" value="移除地图LOGO和版权说明"/> 
+<div id="map" style="width:400px;height:40px"></div> 
+ 	<script type="text/javascript"> 
+function initialize() { 
+var mp = new BMap.Map('map'); 
+mp.centerAndZoom(new BMap.Point(121.491, 31.233), 11); 
+} 
+window.onload = initialize; 
+</script>
+<script src="http://api.map.baidu.com/api?v=2.0&ak=psBI68m8TEBVoouXUq7ZtvEOWqIViNDt" type="text/javascript"></script> 
+ 80     <script src="lib/jquery-2.2.1.js"></script>
+ 81     <script src="lib/js/bootstrap.js"></script>
+ 82
+11
+116   </body>
+117 </html>

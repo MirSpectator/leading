@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+	<style type="text/css">
+		.socle{
+			transform: scale(1.2);
+		},
+		 #container{
+		            height: 600px;
+					width: 30%;
+		            background-image: url("../../day09-20181213/nybj.png");
+		            background-size: 100% 100%;
+		        }
+				canvas{
+					width: 100%;
+				}
+				.one{
+					      width: 50px;
+					      position: absolute;
+					      top: 40px;
+					      left: 380px;
+					      transform: skewY(-20deg);
+					      height: 100px;
+					      border-top: solid 1px black;
+				}
+				.kuang{
+					    transform: skewY(20deg);
+					    width: 45px;
+					    height: 30px;
+					    color: red;
+					    position: absolute;
+					    font-size: 14px;
+					    border: solid black 1px;
+					    left: 50px;
+				}
+				.three{
+					  width: 70px;
+					      position: absolute;
+					      top: 200px;
+					      left: 100px;
+					      transform: skewY(-30deg);
+					      height: 100px;
+					      border-top: solid 1px black;
+				}
+				.two{
+					  width: 50px;
+					      position: absolute;
+					      top: 80px;
+					      left: 100px;
+					      transform: skewY(30deg);
+					      height: 100px;
+					      border-top: solid 1px black;
+				}
+				.four {
+					      width: 50px;
+					      position: absolute;
+					      top: 60px;
+					      left: 280px;
+					      height: 50px;
+					      border-left: solid 1px black;
+				}
+				.five{
+					   width: 50px;
+					       position: absolute;
+					       top: 130px;
+					       left: 340px;
+					       transform: skewY(-10deg);
+					       height: 100px;
+					       border-top: solid 1px black;
+				}
+				.kuangtwo{
+					transform: skewY(-30deg);
+					    width: 60px;
+					    height: 30px;
+					    color: red;
+					    position: absolute;
+					    font-size: 14px;
+					    border: solid black 1px;
+					    left: -60px;
+				}
+				.kuangthree{
+					transform: skewY(30deg);
+					    width: 60px;
+					    height: 30px;
+					    color: red;
+					    position: absolute;
+					    font-size: 14px;
+					    border: solid black 1px;
+					    left: -30px;
+				}
+				.kuangfour{
+					width: 60px;
+					    height: 30px;
+					    color: red;
+					    position: absolute;
+					    font-size: 14px;
+					    border: solid black 1px;
+					    left: -25px;
+					    top: -30px;
+				}
+				.kuangfive{
+					transform: skewY(10deg);
+					width: 60px;
+					height: 30px;
+					color: red;
+					position: absolute;
+					font-size: 14px;
+					border: solid black 1px;
+					left: 50px;
+				}
+	</style>
+	<body>
+		<div>
+		   <div id="map"></div>
+			   	<div class="one">
+					<div class="kuang">温度25</div>
+				</div>
+				<div class="two">
+					<div class="kuangtwo">温度25</div>
+				</div>
+				<div class="three">
+					<div class="kuangthree">温度25</div>
+				</div>
+				<div class="four">
+					<div class="kuangfour">温度25</div>
+				</div>
+				<div class="five">
+					<div class="kuangfive">温度25</div>
+				</div>
+		</div>
+		
+	    <div style="width: 100%;display: flex;">
+             <div style="display: flex;">
+				 <div>严重</div>
+				 <div style="width: 20px; background-color: black;height: 10px; margin-top: 5px;}"></div>
+			 </div>
+			 <div style="display: flex;">
+			 				 <div>一般</div>
+			 				 <div style="width: 20px; background-color: blue;height: 10px; margin-top: 5px;}"></div>
+			 </div>
+			 <div style="display: flex;">
+			 				 <div>良好</div>
+			 				 <div style="width: 20px; background-color: red;height: 10px; margin-top: 5px;}"></div>
+			 </div>
+		</div>
+		<div id="container" style="width: 30%;"></div>
+		<button id="btn-1">区域放大</button>
+		<button id="btn-2">区域缩小</button>
+		<script src="js/jsMap.min.js"></script>
+		<script src="js/jquery-2.2.1.js"></script>
+		<script>
+			//var ctx=  $("#one").getContext("2d);
+			//ctx.strokeRect(20,20,100,100);
+			//ctx.fillRect(40,40,50,50);
+			//ctx.clearRect(50,50,30,30)
+		</script>
+		<script>
+			// 使用 jsMap 提供的 getJSON 方法获取 json 地图数据
+			// 当然，你也可以使用任何你喜欢的方式（如：jQuery / Axios / Fetch 等等）获取 json 地图数据
+			// 然后调用 jsMap.config() 方法设置地图
+			jsMap.getJSON("china.json", function(mapJSON) {
+					jsMap.config("#map", mapJSON, {
+						name: "china",
+						width: "500",
+						zoom: {
+							disabled: false
+						}
+					});
+				}),
+				// 区域放大
+				document.querySelector("#btn-1").onclick = function() {
+					
+				    $(".jsmap-clicked").addClass("socle");
+				},
+
+				// 区域缩小
+				document.querySelector("#btn-2").onclick = function() {
+					
+					 $(".jsmap-clicked").removeClass("socle");
+				}
+		</script>
+		<script>
+		    var obj = {
+		        id:"container",
+		        width:500,
+		        height:200,
+		        datas:[
+		            {
+		                name:"青岛",
+		                color:"red",
+		                data:[30,20,40,21,23,16,33,20,13,21,10,1]
+		            },
+		            {
+		                name:"烟台",
+		                color:"orange",
+		                data:[26,21,33,30,24,20,25,10,8,5,8,10]
+		            },
+		            {
+		                name:"威海",
+		                color:"green",
+		                data:[42,33,28,18,20,33,25,16,15 ,16,23,3]
+		            },
+		
+		        ],
+		        startX:0,
+		        startY:0,
+		        labelColor:"white",
+		        labelCount:0,
+		        nameSpace : 80,
+		        circleColor:"blue",
+		        tip:"山东省各个城市12个月的平均温度"
+		    };
+		
+		    drawLine1(obj);
+		    function drawLine1(obj) {
+		        var id = obj.id;
+		        var datas = obj.datas;
+		        var width = obj.width;
+		        var height = obj.height;
+		        var startX = obj.startX;
+		        var startY = obj.startY;
+		        var labelColor = obj.labelColor;
+		        var labelCount = obj.labelCount;
+		        var nameSpace = obj.nameSpace;
+		        var tip = obj.tip;
+		        var circleColor = obj.circleColor;
+		
+		        var container = document.getElementById(id);
+		        var canvas = document.createElement("canvas");
+		        canvas.width = width;
+		        canvas.height = height;
+		        canvas.style.border = "1px solid red";
+		        container.appendChild(canvas);
+		        var cvs = canvas.getContext("2d");
+		        cvs.beginPath();
+		        cvs.strokeStyle = "white";
+		        var startY1 = 100;
+		        cvs.moveTo(startX, startY1);
+		        cvs.lineTo(startX, startY);
+		        cvs.lineTo(0, startY);
+		        cvs.stroke();
+		        var length = datas.length;
+		        var length1 = datas[0].data.length;
+		        var maxNum = 0;
+		        for(var i = 0;i < length;i++){
+		            for (var j = 0;j < length1;j++){
+		                if (maxNum <= datas[i].data[j]) {
+		                    maxNum = datas[i].data[j];
+		                }
+		            }
+		        }
+		
+		        maxNum = maxNum * 1.1;
+		        var increment =  (startY - startY1) / maxNum;
+		        var labelSpace = (startY - startY1) / labelCount;
+		        for (var i = 0; i <= labelCount; i++) {
+		            var text = Math.round((maxNum / labelCount) * i);
+		            cvs.beginPath();
+		            cvs.fillStyle = labelColor;
+		            cvs.fillText(text, startX - 40, startY - (labelSpace * i ) );
+		            cvs.closePath();
+		            cvs.fill();
+		        }
+		
+		        var start = 0;
+		        var end = 0;
+		        var titleSpace = 30;
+		
+		        for (let i = 0;i < length ;i++) {
+		            var k = 100;
+		
+		            for (let j = 0; j < length1; j++) {
+		
+		                // end = length1 * (i + 1);
+		                // start = i * length1;
+		                //折线
+		                setTimeout(function () {
+		                    cvs.beginPath();
+		                    cvs.strokeStyle = datas[i].color;
+		                    cvs.moveTo(startX + nameSpace * (j + 1), (startY1 + (maxNum - datas[i].data[j]) * increment ));
+		                    cvs.lineTo(startX + nameSpace * (j + 2), (startY1 + (maxNum - datas[i].data[j + 1]) * increment));
+		                    cvs.stroke();
+		                }, k += 100);
+		
+		                end = length1 * (i + 1);
+		                start = i * length1;
+		                //圆点
+		                cvs.beginPath();
+		                cvs.fillStyle = circleColor;
+		                cvs.arc(startX + nameSpace * (j + 1), (startY1 + (maxNum - datas[i].data[j]) * increment ), 4, 0, Math.PI * 2)
+		                cvs.closePath();
+		                cvs.fill();
+		
+		
+		
+		            }
+		            cvs.beginPath();
+		            cvs.strokeStyle = datas[i].color;
+		            cvs.moveTo(1050, 40 + titleSpace * i);
+		            cvs.lineTo(1100, 40 + titleSpace * i);
+		            cvs.stroke();
+		            cvs.closePath();
+		
+		            cvs.beginPath();
+		            cvs.fillStyle = datas[i].color;
+		            cvs.font = "20px 宋体";
+		            cvs.fillText(datas[i].name, 1130, 45 + titleSpace * i);
+		            cvs.stroke();
+		            cvs.closePath();
+		
+		
+		        }
+		        cvs.beginPath();
+		        cvs.fillStyle = labelColor;
+		        cvs.fillText(tip,20,30);
+		        cvs.closePath();
+		        cvs.fill();
+		        for(var k = 0;k < length1;k++){
+		            cvs.beginPath();
+		            cvs.fillStyle = labelColor;
+		            cvs.fillText((k + 1) + "月份", startX + nameSpace * (k + 1) - 10, startY + 30 );
+		            cvs.closePath();
+		            cvs.fill();
+		        }
+		    }
+		</script>
+	</body>
+
+</html>

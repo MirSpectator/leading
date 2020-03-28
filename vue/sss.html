@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div></div>
+	</body>
+	<script type="text/javascript">
+		const s = new Set(["a","b","c"]);
+		s.forEach(value => {
+			console.log(value);
+		})
+	</script>
+	<!-- <script type="text/javascript">
+		let ary = [1,2,3,];
+		//两个输出内容等价  此语法是将每个数组元素增加了一个逗号然后分割开的
+		console.log(...ary);
+		console.log(1,2,3,);
+		//扩展运算法可以应用于合并数组
+		let ary1 = [1,2,3];
+		let ary2 = [4,5,6];
+		let ary3 = [...ary1,...ary2];
+		//合并后的数组
+		console.log(ary3);
+		//第二种数组的合并方法
+		let ary4 = [];
+		ary4.push(...ary2);
+		console.log(ary4);
+		//扩展运算符可以将伪数组转换为真正的数组
+		var odivs = document.getElementsByTagName('div');
+		 console.log(odivs);
+		 var ary5 = [...odivs];
+		 ary5.push('a');
+		 console.log(ary5);
+	</script> -->
+	<!-- <script type="text/javascript">
+		//剩余参数和解构配合使用
+		let ary = ['张三','李四','王五'];
+		let [s1,...s2] = ary;
+		console.log(s1);
+		console.log(s2);
+	</script> -->
+	<!-- <script type="text/javascript">
+		const sum = (...args) =>{
+			let total = 0;
+			args.forEach(item =>{
+				total += item;
+			})
+			return total;
+		}
+		console.log(sum(10,20));
+		console.log(sum(10,20,30));
+	</script> -->
+	<!-- <script type="text/javascript">
+		//因为obj是对象,没有产生作用域,所以say指向不到obj对象的里边  只能更上一层  也就是指向window对象    箭头函数是没有绑定this的 所以只能指向上下文的this
+		var obj = {
+			age: 20,
+			say: ()=>{
+				alert(this.age)
+			}
+		};
+		obj.say();
+	</script> -->
+	<!-- <script  type="text/javascript" charset="utf-8">
+		//箭头函数是用来简化函数定义语法的
+		const fn = () => {
+			console.log(123);
+		};
+		fn();
+		//在箭头函数中,如果函数体只有一句代码,并且代码的执行结果
+		//就是函数的返回值,函数体大括号就可以省略
+		const sum = (n1,n2) => n1+n2;
+		const result = sum(1,2);
+		console.log(result);
+		
+		//在箭头函数中,如果形参只有一个 形参外侧的小括号也是可以省略的
+		const fns = (v) =>{
+			alert(v);
+		};
+		fns("你好啊 调用成功");
+	</script> -->
+	<!-- <script type="text/javascript">
+		const obj = {name:'张三'};
+		function fn () {
+			console.log(this);
+			return () =>{
+				console.log(this);
+			}
+		}
+		const resfn = fn.call(obj);
+		resfn();
+	</script> -->
+	<!-- <script>
+		//对象解构
+		let person = {name:"zhangsan",age:20};
+		let {name,age,sex} = person;
+		console.log(name);
+		console.log(age);
+		console.log(sex);
+		let {name:uname,age:uage,sex:usex} = person;
+		console.log(uname);
+		console.log(uage);
+		console.log(usex);
+	</script> -->
+	<!-- <script type="text/javascript">
+		//set数据结构的实例方法
+		let s = new Set ();
+		console.log(s);
+		//add(value) 添加某个值 返回set 本身
+	    let s1 = s.add(1);
+		console.log(s);
+		console.log(s1);
+		let s2 = s.add(1).add(2).add(3);
+	    console.log(s);
+		console.log(s1)
+		console.log(s2);
+		console.log(s1===s2);
+		console.log(s===s1);
+		console.log(s2===s)
+		//delete(value) 删除某个值 返回一个布尔值 表示删除成功
+		let target = s.delete(2);
+		console.log(target);
+		console.log(s)
+		//has(value) 返回一个布尔值  表示该值是否是set的成员
+		let bol = s.has(2);
+		console.log(bol)
+		console.log(s);
+		//clear(value) 清楚所有的成员  没有返回值
+	    s.clear();
+		console.log(s);
+	</script> -->
+	<!-- <script>
+		//set数据结构  跟数组类似  但是不能有重复值  使用new一个set的实例来创建set
+		//  参数可以是一个数组  可以使用set进行数组去重
+		let ary = [1,2,3,4,5,3,2]
+		let s = new Set(ary);
+		console.log(ary);
+		console.log(s);
+		//把set转化为数组
+		let ary2 = [...s];
+		console.log(ary2);
+		let ary3 = [s];
+		console.log(ary3);
+	</script> -->
+	<!-- <script type="text/javascript">
+		//字符串的repeat方法 指定的字符串窜重复n次
+		let str = "你好啊";
+		let s1 = str.repeat(4);
+		console.log(s1)
+	</script> -->
+	<!-- <script>
+		//字符串的endsWith方法和startWith方法
+		let str = "Hello ECMAScript 2015";
+		let s1 = str.endsWith("2016");
+		let s2 = str.startsWith("Hello");
+		console.log(s1);
+		console.log(s2)
+	</script> -->
+	<!-- <script>
+		//模板字符串  可以使用变量的值  可以换行  可以调用函数
+		let s = `张三`;
+		let h = `你好啊，我的
+		名字
+		是${s}`
+		console.log(h)
+	    let result = {
+			name: '王五',
+			age: '18'
+		}
+		let  html = `<div>
+		     <span>${result.name}</span>
+			 <span>${result.age}</span>
+		</div>`;
+		console.log(html);
+		const fn = () => "我是fn函数";
+		let value = `你好啊 ${fn()}`;
+		console.log(value)
+	</script> -->
+	<!-- <script>
+		//array.includes方法  用于查找数组中是否有某个元素的值
+		let ary = [1,5,9];
+		var target = ary.includes(5)
+		console.log(target)
+	</script> -->
+	<!-- <script>
+		//array.fundindex方法
+		let ary = [1,5,9,15];
+		var target = ary.findIndex(item => item>=9)
+		console.log(target)
+	</script> -->
+	<!-- <script>
+	//array.find方法
+		let ary = [{
+			id: 1,
+			name: '张三'
+		},{
+			id: 2,
+			name: '李四'
+		}];
+		let target = ary.find(item =>  item.id == 2)
+		console.log(target)
+	</script> -->
+	<!-- <script>
+		//array.from方法
+		var arraylike = {
+			"0": "1",
+			"1": "2",
+			"length": 2
+		}
+		console.log(arraylike)
+		var ary = Array.from(arraylike,item => item*2)
+		console.log(ary)
+	</script> -->
+	<!-- <script>
+		let arr1 = ['张三','李四','王五'];
+		let arr2 = [s1, ...s2] = arr1;
+		console.log(arr1)
+		console.log(arr2)
+		//合并数组  方法一
+		let arr3 = [...arr1,...arr2]
+		console.log(arr3)
+		//方法二
+		arr2.push(...arr1)
+		console.log(arr2)
+	</script> -->
+	<!-- <script>
+		function fn() {
+			console.log(this)
+			return () => {
+				console.log(this)
+			}
+		}
+		fn()()
+	</script> -->
+	<!-- <script>
+		var obj = {
+		    age : 20,
+			sar: () => {
+				alert(this.age)
+			}
+		}
+		obj.sar();
+	</script> -->
+	<!-- <script>
+		var reg =/^[a-zA-Z0-9_-]{6,16}$/;
+	    var uname = document.querySelector(".uname");
+		var span = document.querySelector("span");
+		uname.onblur = function() {
+			if(reg.test(this.value)){
+				span.className = 'right';
+				span.innerHTML = "用户名格式输入正确";
+			}else {
+				span.className = "wrong";
+				span.innerHTML = "用户名格式输入不正确";
+			}
+		}
+	</script> -->
+	<!-- <script>
+		//量词符: 用来设定某个模式出现的次数
+		//简单理解:就是让下边的a这个字符重复多少次
+		//var rg = /^a$/;
+		
+		// * 相当于 >=0 可以出现0次或者很多次
+		// var rg = /^a*$/;
+		// console.log(rg.test(""))
+		// console.log(rg.test("a"))
+		// console.log(rg.test("aaaa"))
+		
+		// + 相当于 >=1  可以出现一次或者很多次
+		// var rg = /^a+$/;
+		// console.log(rg.test(""))
+		// console.log(rg.test("a"))
+		// console.log(rg.test("aaaa"))
+		
+		// ？ 相当于 1 || 0 
+		// var rg = /^a?$/;
+		// console.log(rg.test(""))
+		// console.log(rg.test("a"))
+		// console.log(rg.test("aaaa"))
+		
+		// {3 } 就是重复3次 
+		// var rg = /^a{3}$/;
+		// console.log(rg.test(""))
+		// console.log(rg.test("a"))
+		// console.log(rg.test("aaa"))
+		// console.log(rg.test("aaaa"))
+		
+		// {3,} 大于等于3
+		// var rg = /^a{3,}$/;
+		// console.log(rg.test(""))
+		// console.log(rg.test("a"))
+		// console.log(rg.test("aaaa"))
+		
+		// {3,16} 大于等于3 并且 小于等于16
+		var rg = /^a{3,5}$/;
+		console.log(rg.test(""))
+		console.log(rg.test("a"))
+		console.log(rg.test("aaaa"))
+		console.log(rg.test("aaaabc"))
+	</script> -->
+	<!-- <script>
+		//字符组合
+		var rg = /^[^a-zA-Z0-9_-]$/;//如果中括号里边有这个^符号 表示取反的意思 千万别和边界符^混淆
+		console.log(rg.test('a'))
+		console.log(rg.test('B'))
+		console.log(rg.test('1'))
+		console.log(rg.test('_'))
+		console.log(rg.test('-'))
+	</script> -->
+	<!-- <script>
+		//var rg = /abc/; 只要包含有abc就可以了
+		//字符类：[] 表示有一系列的字符可供选择，只要匹配其中一个就可以了 
+		//var rg = /[abc]/  //只要包含有a 或者 包含有b 或者包含有c 都返回为true
+		// var rg = /^[abc][zxc]/; 
+		// console.log(rg.test("hbga"))
+		// console.log(rg.test("azvfhkf"))
+		var rg = /^[a-z]$/;// -代表范围 表示从a到z的所有的小写的英文字母
+		console.log(rg.test('a'))
+		console.log(rg.test('B'))
+		console.log(rg.test('1'))
+	</script> -->
+	<!-- <script>
+		//边界符 ^ $
+		var rg = /123/;//正则表达式不需要加引号,不管是数字类型的还是字符串类型
+		// /abc/ 只要包含有abc这个字符串返回对的都是true
+	    console.log(rg.test("01234"))
+		var rgs = /^123/;//必须以123开头
+		console.log(rgs.test("1234"))
+		var rgss = /^123$/;//只能输入123
+		console.log(rgss.test("123"))
+		console.log(rgss.test("1234"))
+		console.log(rgss.test("01234"))
+	</script> -->
+	<!-- <script>
+		//正则表达式在js中的使用
+		
+		//1.利用RegExp对象来创建正则表达式
+		var regexp = new RegExp(/123/);
+		console.log(regexp)
+		
+		//2.利用字面量创建正则表达式
+		var rg = /123/;
+		
+		//3. 测试正则表达式时是否符合规范 test()方法返回tue或者false
+		var s = "123";
+		console.log(rg.test(s))
+		
+	</script> -->
+	<!-- <script>
+		//浅拷贝只是拷贝一层,更深层次对象级别的只拷贝引用,
+		//深拷贝会拷贝多层.每一级别的数据都会拷贝.
+		//es6新增方法Object.assign(target,...sources) 可以实现浅拷贝
+		//理解:浅拷贝不占用内存,深拷贝占用内存 推挤使用assiggn进行浅拷贝
+		var obj = {
+			id: 1,
+			name: 'aandy',
+			msg:{
+				age:18
+			},
+			color: ['pink','red']
+		};
+		var o = {};
+
+		//封装函数,利用函数递归实现深拷贝
+		function deepCopy(newobj,oldobj) {
+			for(var k in oldobj) {
+				//先判断属于哪一种数据类型  简单或者复杂的
+				//第一步,获取属性值 oldobj[k]		
+                var item = oldobj[k];
+			    //第二步 判断是否是数组 数组也属于复杂数据类型 需要深拷贝
+				if(item instanceof Array) {//数组放第一是因为数组也属于对象  所以要先判断数组
+					newobj[k] = [];
+					deepCopy(newobj[k],item);
+				}else if(item instanceof Object){
+					//第三步 判断是否是对象
+					newobj[k] = {};
+					deepCopy(newobj[k],item);//一定要注意此处是否传递参数正确
+				}else {
+					//第四步 既不是对象 也不是数组 那就属于简单数据类型
+					newobj[k] = item;
+				}
+				
+			}
+		}
+		deepCopy(o,obj);
+		console.log(o)
+		obj.msg.age=20;//验证是否拷贝成功
+		//验证数组是否是对象
+		var arr = ['pink','res'];
+		console.log(arr instanceof Object)
+	</script> -->
+	<!-- <script>
+		//利用递归遍历数据
+		var data = [{
+			id: 1.,
+			name: '家电',
+			goods: [{
+			id: 11,
+			gname: '冰箱',
+			goods: [{
+				id: 111,
+				gname: '海尔'
+			  },{
+				id: 112,
+				gname: '美的'
+			  }]
+		    },{
+			id: 12,
+			gname: '洗衣机'
+		    }],
+		},{
+			id: 2,
+			name: '服饰'
+		}]
+		//我们想要做输入id号,就可以返回的数据对象
+		//1.利用foreach去遍历里面的每一个对象
+		function getID(json,id) {
+			var o = {};
+			json.forEach(function(item){
+				//console.log(item)//两个数组元素
+				if(item.id==id){
+					//console.log(item)
+					o = item;
+					return item;
+				   //得到里层的数据
+				   //里边应该有goods这个数组 并且数组的长度不为0
+				}else if(item.goods&&item.goods.length>0){
+					o = getID(item.goods,id)
+				}
+			});
+			return o;
+		}
+	    console.log(getID(data,1))
+		console.log(getID(data,2))
+		console.log(getID(data,11))
+		console.log(getID(data,12))
+		console.log(getID(data,111))
+	</script> -->
+	<!-- <script>
+		//利用递归求1~n的阶乘 1*2*3*4*5*..n
+		function fn(n) {
+			if(n == 1){
+				return 1;
+			}
+			return n* fn(n-1);
+		}
+		console.log(fn(5));
+	</script> -->
+	<!-- <script>
+		
+		//利用递归函数求斐波那契序列(兔子序列)1,1,2,3,5,8,13,21...
+		//用户输入一个数字 n 就可以求出 这个数字对应的兔子序列值
+		//我们只需要知道用户输入的n的前面两项(n-1，n-2)就可以计算出n对应的序列值
+		//计算原理就是  每一个序列值的底层都是1+1的出来的
+		var i = 0
+		function fb(n) {
+	        i++;
+			console.log(i+"-----------"+n)
+			if(n == 1 || n == 2){
+				return 1;
+			}
+			console.log(i+"-----------"+n)
+			return fb(n-1)+fb(n-2)
+		}
+		console.log(fb(3))
+		console.log(fb(6))
+	</script> -->
+	<!-- <script>
+		var name = 'The Window';
+		var object = {
+			name:"My Object",
+			getNameFunc: function(){
+				return function() {
+					return this.name;
+				}
+			}
+		}
+		console.log(object.getNameFunc()())
+	</script> -->
+	<!-- <script>
+		//闭包应用-点击li输出当前li的索引号
+		 var car = (function(){
+			 var start = 13 ; //起步价,局部变量
+			 var total = 0;   //总价 局部变量
+			 return {
+				 //正常的总价
+				 price: function(n){
+					 if(n<3){
+						 total = start;
+					 }else {
+						 total = start + (n-3)*5
+					 }
+					 return total;
+				 },
+				 //拥堵情况
+				 yd: function(flag) {
+					return flag ? total + 10 : total;
+				 }
+			 }
+		 })()
+		 console.log(car.price(5))
+		 console.log(car.yd(true))
+	</script> -->
+	<!-- <script>
+		//闭包应用-点击li输出当前li的索引号
+		//1.我们可以利用动态添加属性的方式
+		 var lis = document.querySelector('.nav').querySelectorAll('li');
+		/*for(var i = 0; i<lis.length; i++){
+			lis[i].index = i ;
+			lis[i].onclick = function() {
+				//console.log(i)
+				console.log(this.index)
+			}
+		} */
+		//利用闭包的方式得到当前小li的索引号 会导致内存泄漏
+		for(var i = 0; i <lis.length; i++){
+			//利用for循环创建了4个立即执行函数
+			(function(i){
+				//console.log(i)
+				lis[i].onclick = function() {
+					console.log(i)
+				}
+			})(i)
+		}
+	</script> -->
+</html>

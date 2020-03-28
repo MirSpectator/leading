@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			.imga{
+				display: block;
+			}
+			.imgb{
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div >
+			<img id="a" class="imga" src="https://www.mapsciencecloud.com/jing/image/shouhuo123456.png" />
+		</div>
+		<div >
+			<img id="b" class="imgb" src="https://www.mapsciencecloud.com/jing/image/fahuo.png" />
+		</div>
+		<button id="button">切换图片</button>
+		<button id="buttona">点5次会出现惊喜哦！</button>
+	</body>
+	<script src="https://www.mapsciencecloud.com/jing/lib/js/jquery-2.2.1.js"></script>
+	<script type="text/javascript" src="https://www.mapsciencecloud.com/jing/qiehuan.js" ></script>
+	<script type="text/javascript">
+		$("#button").click(function(){
+			var a = $('#a').css('display');
+			var b = $('#b').css('display');
+			console.log(a)
+			if(a=="block"){
+				console.log("相等")
+				$("#a").css("display","none");
+    $("#b").css("display","block");
+			}else {
+				console.log("不等")
+	$("#a").css("display","block");
+    $("#b").css("display","none");
+			}
+  
+});
+		
+	</script>
+</html>

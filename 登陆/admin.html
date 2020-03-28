@@ -1,0 +1,229 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>袋鼠帮帮首页</title>
+    <link rel="stylesheet" href="css/ui.css">
+	<link rel="stylesheet" type="text/css" href="css/styles.css" />
+	<link rel="stylesheet" href="css/swiper.min.css">
+  
+	
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/dsbb.js"></script>
+	<script src="js/swiper.min.js"></script>
+	<script src="http://api.map.baidu.com/api?v=2.0&ak=d6mLk6kBwAA0TadspIDeGA28EIAE9Ely" type="text/javascript"></script>
+
+	<script type="text/javascript">
+	window.onload = function(){
+		var indexdw= DsbbReadCookie('indexdw'); 
+		if($.isEmptyObject(indexdw)){
+			var geolocation=new BMap.Geolocation();
+	        geolocation.getCurrentPosition(function(r){
+	            if(this.getStatus()==BMAP_STATUS_SUCCESS){
+	                var lat=r.address.lat//当前经度
+	                var lng=r.address.lng//当前纬度
+	                console.log(lat)
+	                console.log(lng)
+	                var province=r.address.province //返回当前省份
+	                var city=r.address.city//返回当前城市
+	                var district =r.address.district//区
+	                var street= r.address.street//街道
+	                var streetNumber=r.address.streetNumber//门牌
+	                console.log(city)
+	                console.log(district)
+	                console.log(street)
+	                console.log(streetNumber) 
+	                DsbbSetCookie("indexdw",city,1);
+	                $('#city').text(city)
+	            }
+	        });
+		}else{
+			$('#city').text(indexdw);
+		}
+	　　　$.ajax({ 
+	        type: "GET", 
+	        url: "home/getSorts", 
+	        data: {parentid:0}, 
+	        dataType: "json", 
+	        success: function(data){ 
+	                    $('#sorts').empty();   //清空resText里面的所有内容 
+	                    var html = '';  
+	                    $.each(data, function(commentIndex, comment){  
+	                    	var idd=comment['id'];
+	                    	var namee=comment['name'];
+	                    	var img=comment['img'];
+	                    	var dat='\"'+idd+'\",'+'\"'+namee+'\",'+'\"'+img+'\"';
+	                          html += '<div  onclick=selectonclick('+dat+')'
+                      		  	  
+                  		  				+'; class="grids-grid3"> <div class="grids-grid3-cont"> <div class="grids-grid-icon">'
+	                          			+ '<img src="'
+		                              	+ comment['icon']
+		                              	+'" alt=""> </div> <p class="grids-grid-label">'
+		                              	+ comment['name']
+		                              	+'</p>  </div> </div>  ';
+	                    }); 
+	                    $('#sorts').html(html); 
+	                 } 
+	    });
+		$.ajax({ 
+	        type: "GET", 
+	        url: "advertisement/getAdvertisements", 
+	        data: {parentid:0}, 
+	        dataType: "json", 
+	        success: function(data){ 
+	                    $('#lbt').empty();   //清空resText里面的所有内容 
+	                    var html = '';  
+	                    $.each(data, function(commentIndex, comment){  
+	                    	var img=comment['img'];
+							var url=comment['url'];
+	                    	html+='<div class="swiper-slide"><a class="gg_a" href="'+url+'"><img class="index_lbt1" alt="" src="'+img+'"></a></div>';
+	                    	 
+	                    	 
+	                    }); 
+	                    $('#lbt').html(html); 
+						 var swiper = new Swiper('.swiper-container', {
+						  spaceBetween: 30,
+						  centeredSlides: true,
+						  autoplay: {
+							delay: 2500,
+							disableOnInteraction: false,
+						  },
+						  pagination: {
+							el: '.swiper-pagination',
+							clickable: true,
+						  },
+						   
+						});
+	                 } 
+	    });
+	}  
+ 
+	function selectonclick(id,name,img) {
+		var selectindexid="selectindexid";
+		var selectindexname="selectindexname";
+		var selectindeximg="selectindeximg";
+		var nDays=1;
+		DsbbSetCookie(selectindexid,id,nDays);
+		DsbbSetCookie(selectindexname,name,nDays);
+		DsbbSetCookie(selectindeximg,img,nDays);
+	    document.location.href = "select2";  
+	} 
+	 
+	function changevalue(){
+		var item = $("#s").val(); 
+		$.ajax({ 
+	        type: "GET", 
+	        url: "home/getSortsLike", 
+	        data: {value:item}, 
+	        dataType: "json", 
+	        success: function(data){ 
+	                    $('#sorts').empty();   //清空resText里面的所有内容 
+	                    var html = '';  
+	                    $.each(data, function(commentIndex, comment){  
+	                    	 
+	                    	var idd=comment['id'];
+	                    	var namee=comment['name'];
+	                    	var dat='\"'+idd+'\",'+'\"'+namee+'\"';
+	                          html += '<div  onclick=selectonclick('+dat+')'
+                      		  	  
+                  		  				+'; class="grids-grid3"> <div class="grids-grid3-cont"> <div class="grids-grid-icon">'
+	                          			+ '<img src="'
+		                              	+ comment['icon']
+		                              	+'" alt=""> </div> <p class="grids-grid-label">'
+		                              	+ comment['name']
+		                              	+'</p>  </div> </div>  ';
+	                    }); 
+	                    $('#sorts').html(html); 
+	                 } 
+	    }); 
+	}
+	
+	</script>
+	
+</head>
+
+
+<body class="android" style="overflow:auto">
+	<div class="view-container" style="overflow-y:auto;
+ overflow-x:hidden;">
+            <div class="my-car-thumbnail " >
+			
+				<div class="topzj ">
+					<a href="/wzselectindex">
+					
+					<div class="topzj-l">
+						<div class="topzj-l"><img  src="images/dsimg/dingwei.png" /></div>
+						<div id="city" class="topzj-l ">定位中</div>
+					<!-- 	<div class="topzj-l"><img  src="images/dsimg/gengduo.png" /></div> -->
+						<div class="clearzj"></div>
+					</div> </a>
+					<!-- <div class="indextitle">袋鼠帮帮</div>  -->
+					 <div class="car-title">
+				 
+					 
+						<form id="searchForm" method="post">
+							<fieldset>
+								<input id="s" type="text" placeholder="输入您想要的服务" oninput="changevalue()" /> 
+							</fieldset>
+						</form> 
+					 
+				 
+			</div>
+					<div class="topzj-r"></div>
+					<!-- <div class="topzj-r" hidden="hidden"><img  src="images/dsimg/saoyisao.png" /></div>  -->
+				</div> 
+				
+				<div class="clearzj"></div>
+				<div class="topzj1">
+					<!-- Swiper -->
+					
+					<div class="swiper-container">
+						<div id="lbt" class="swiper-wrapper">
+						  
+						</div>
+						<!-- Add Pagination -->
+						 <!-- <div class="swiper-pagination" ></div>
+					 
+					</div>  -->
+				</div>
+			</div>
+			
+			
+			
+           
+			
+            <div class="grids-contant3" >
+               <div id="sorts">	  </div> 
+            </div>
+           
+            <div class="car-title">
+				<div class="car-logo"><span class="car-v">  </span></div> 
+			</div>
+			<div class="car-title">
+				<div class="car-logo"><span class="car-v">  </span></div> 
+			</div>
+			<div class="car-title">
+					<div class="car-logo"><span class="car-v">  </span></div> 
+			</div> 
+			<div class="car-title">
+				<div class="car-logo"><span class="car-v">  </span></div> 
+			</div> 
+			<div class="car-title">
+				<div class="car-logo"><span class="car-v">  </span></div> 
+			</div> 
+    </div>
+
+<div class="tab-bar tab-bottom" >
+    <a class="tab-button active" href="home">
+		<i class="tab-button-icon icon icon-home"></i>
+		<span class="tab-button-txtzj">首页</span></a>
+    <a class="tab-button " href="pay">
+		<i class="tab-button-icon icon icon-exhibitiona" style="background-size:30px"></i>
+		<span class="tab-button-txtzja">支付</span></a>
+    <a class="tab-button " href="/my">
+		<i class="tab-button-icon icon icon-mya"></i>
+		<span class="tab-button-txtzja">我的</span></a>
+</div>
+</body>
+</html>

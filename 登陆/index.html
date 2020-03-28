@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>遥控树莓派</title>
+    <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <style type="text/css">
+        #up {
+            margin-left: 55px;
+            margin-bottom: 3px;
+        }
+        #down {
+            margin-top: 3px;
+            margin-left: 55px;
+        }
+        .yin{
+        	display: block;
+        }
+        .cang{
+        	display: none;
+        }
+     .body{
+				width: 100%;
+				
+			}
+			.form{
+				font-size: 20px;
+				padding-top: 80px;
+				margin: 0 auto;
+				border: solid black 1px;
+				width: 30%;
+				height:250px;
+				margin-top: 5%;
+			}
+			.mima{
+				
+				margin: 0 auto;
+				width: 60%;
+				height: 80px;
+			}
+			.zhanghao{
+				
+				margin: 0 auto;
+				width: 60%;
+				height: 80px;
+			}
+			.mima input{
+				line-height: 20px;
+			}
+			.zhanghao input{
+				line-height: 20px;
+			}
+			.button{
+				width: 20%;
+				margin: 0 auto;
+			}
+			.button button{
+				width: 100%;
+				height: 40px;
+			}
+    </style>
+    <script>
+        $(function(){
+            $("button").click(function(){
+                cmd="{cmd:"+this.id+"}"
+                //alert(cmd)
+                $.post("/cmd",this.id,function(data,status){
+                });
+            });
+
+        });
+
+    </script>
+</head>
+
+<body>
+<div id="container"  class="container cang">
+    <div>
+        <button id='up' class="btn btn-lg btn-primary glyphicon glyphicon-circle-arrow-up">前</button>
+    </div>
+    <div>
+        <button id='left' class="btn btn-lg btn-primary glyphicon glyphicon-circle-arrow-left">左</button>
+        <button id='stop' class="btn btn-lg btn-primary glyphicon glyphicon-stop">停</button>
+        <button id='right' class="btn btn-lg btn-primary glyphicon glyphicon-circle-arrow-right">右</button>
+    </div>
+    <div>
+        <button id='down' class="btn btn-lg btn-primary glyphicon glyphicon-circle-arrow-down">后</button>
+    </div>
+
+</div>
+<div id="body" class="body yin">
+			<div class="form"  >
+				<div  class="zhanghao">账号：<input id="zhanghao" name="name" placeholder="请输入登录账号:" type="text" /></div>
+				<div  class="mima">密码：<input id="mima" type="password" placeholder="请输入密码：" name="pwd"/></div>
+			    <div class="button"><button onclick="getvalue()" >登陆</button></div>
+			</div>
+		</div>
+<script>
+	 function getvalue(){
+				 var name=document.getElementsByName("name")[0].value
+		      var mima=document.getElementsByName("pwd")[0].value
+		      if(name=="你好"&&mima=="123456"){
+		      $("#container").removeClass("cang")
+		$("#body").addClass("cang")
+		$("#container").addClass("yin")
+		      }else if(name=="admin"&&mima=="admin"){
+		      $("#container").removeClass("cang")
+		$("#body").addClass("cang")
+		$("#container").addClass("yin")
+		      }else{
+		      	alert("账号或者密码不正确请重新输入")
+		      }
+			}
+	
+</script>
+<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="jquery-2.2.1.js"></script>
+</body>
+</html>

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>袋鼠帮帮确认支付</title>
+    <link rel="stylesheet" href="css/ui.css">
+	<link rel="stylesheet" href="css/xx.css"> 
+	<link rel="stylesheet" href="css/xz.css">
+	<script type="text/javascript" src="js/jquery.min.js"></script> 
+	<script type="text/javascript" src="js/xz.js"></script> 
+	<script type="text/javascript" src="js/dsbb.js"></script>
+	<script type="text/javascript" src="http://res2.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
+	<script type="text/javascript">
+	var selecttb=0;
+	//戳
+	var appId;
+	var cfgTimeStamp;
+		var cfgNonceStr;
+		
+		var sign;
+	
+	
+		
+		
+		
+  /*   function getTimeStamp(){
+        cfgTimeStamp = parseInt(new Date().getTime() / 1000) + '';
+    }
+    //随即字符串
+    function getNonceStr(){
+        var $chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        var maxPos = $chars.length;
+        var noceStr = "";
+        for (i = 0; i < 32; i++)
+            noceStr += $chars.charAt(Math.floor(Math.random() * maxPos));
+        cfgNonceStr = noceStr;
+    }
+
+    getTimeStamp();
+    getNonceStr();
+     */
+    
+	window.onload = function(){	  
+    	 $.ajax({
+		     type:"GET",
+		     url:"https://formattingclub.com/YiNuoLogin/wechat/config",
+		     success:function(res){
+		    	 alert("访问成功"+res+"---------url"+res)
+		      appId=res.appid;
+		      cfgTimeStamp=res.timestamp;
+		      cfgNonceStr=res.nonceStr;
+		      sign=res.signature;
+		      
+		     }
+		});
+		var code=DsbbReadCookie('ddbh'); 
+		
+		$.ajax({ 
+			url:"order/getOrderByCode", 
+			type:"post" , 
+			dataType:"json", 
+			data: {code:code}, 
+			success:function(data){   
+				$("#je").html(data['money']); 
+			} 
+		}); 
+		//0912  start
+		// 分
+	    
+		wx.config({
+
+			debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+
+			appId:appId , // 必填，公众号的唯一标识
+
+			timestamp:cfgTimeStamp, // 必填，生成签名的时间戳
+
+			nonceStr: cfgNonceStr, // 必填，生成签名的随机串
+
+			signature:sign ,// 必填，签名，见附录1
+
+			jsApiList: ['invokeMiniProgramAPI','checkJsApi'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+
+		});
+		
+		wx.ready(function (res) {
+			
+			     wx.checkJsApi({
+			        jsApiList: ['miniProgram.navigateTo'],
+			        success: function (res) {
+			        	alert("成功12345"+JSON.srtingify(res));
+			        },
+			        fail:function(res){
+			        	alert('错误'+res)
+					  },
+					  complete:function(res){
+						  alert('该方法已运行'+res)
+					  }
+			     
+			    });
+			    // alert("进入此方法")
+		            
+		});
+		
+		
+		wx.error(function(res){
+			alert("失败12345"+JSON.srtingify(res));
+		});
+		
+		
+		//end 
+	}
+	
+	function choice(name){ 
+		$("#qb").empty(); 
+		$("#wx").empty(); 
+		$("#zfb").empty(); 
+		if("qb"==name){ 
+			$("#qb").html("<img src='images/dsimg/xuanzhong.png'>"); 
+			$("#wx").html("<img src='images/dsimg/weixuanzhong.png'>"); 
+			$("#zfb").html("<img src='images/dsimg/weixuanzhong.png'>"); 
+			selecttb=0;
+		}
+		if("wx"==name){
+			/* alert("暂未开启此功能");
+			return; */
+			$("#qb").html("<img src='images/dsimg/weixuanzhong.png'>"); 
+			$("#wx").html("<img src='images/dsimg/xuanzhong.png'>"); 
+			$("#zfb").html("<img src='images/dsimg/weixuanzhong.png'>"); 
+			selecttb=1;
+		}
+		if("zfb"==name){
+			alert("暂未开启此功能");
+			return;
+			$("#qb").html("<img src='images/dsimg/weixuanzhong.png'>"); 
+			$("#wx").html("<img src='images/dsimg/weixuanzhong.png'>"); 
+			$("#zfb").html("<img src='images/dsimg/xuanzhong.png'>"); 
+			selecttb=2;
+		}
+		
+	}
+	
+	function submit(){
+	
+		/* var je= $('#je').html().trim(); 
+		var uid=DsbbReadCookie('lu'); 
+		var oid=DsbbReadCookie('ddbh');  */
+		/* if(0==selecttb){//钱包
+			$.ajax({ 
+				url:"pay/payForAll", 
+				type:"post" , 
+				dataType:"text", 
+				data: {uid:uid,oid:oid,je:je,index:selecttb}, 
+				success:function(data){   
+					 if('0'==data){
+						 DsbbSetCookie('payzfcgfs',selecttb ,1);
+			         	 DsbbSetCookie('payzfcgje',je,1);
+						 document.location.href = "zfcg";   
+					 }else{  
+						setTimeout(function() {
+							webToast(data,"top", 2000);
+						}, 300);
+					 }
+				} 
+			});  
+		} */
+		var wxid = '';
+		var sigin = '';
+		if(1==selecttb){//weixin
+			
+			$.ajax({ 
+				url:"https://formattingclub.com/YiNuoLogin/pay/pay", 
+				type:"post" , 
+				dataType:"json", 
+				data: {oid:"5"}, 
+				success:function(res){
+				      //console.log("访问成功"+res.msg+"---------url"+res.mwebUrl)
+				  	//判断是否是在wx小程序环境
+						if(wx  && res.msg=='success'){
+						  //点击微信支付后，调取统一下单接口生成微信小程序支付需要的支付参数
+					/* 	 var params = '?timestamp='+data.jsparams.timeStamp+'&nonceStr='+data.jsparams.nonceStr
+						               +'&'+data.jsparams.pkg+'&signType='+data.jsparams.signType
+						               +'&paySign='+data.jsparams.paySign+'&orderId='+data.orderid+'&pType=0';
+						  
+ */						               var parpams = "跳转成功"
+						               
+						            console.log("进入此方法")
+						            	   
+						  //定义path 与小程序的支付页面的路径相对应
+						  var path = '/pages/wxpay/wxpay'+parpams;
+						  //通过JSSDK的api使小程序跳转到指定的小程序页面
+						  wx.miniProgram.navigateTo({url: path,
+							  success:function(res){
+								  alert('8889998889'+res)
+								 
+							  },
+						  fail:function(res){
+							  alert('错误'+res)
+						  },
+						  complete:function(res){
+							  alert('该方法运行'+res)
+						  }
+						  
+						  });		
+						  
+						  }else{
+							  location.href = res.mweb_url
+						  }
+				      		
+				     }
+				
+				
+			});  
+			
+
+			 
+		}
+		
+		if(2==selecttb){//zfb
+			
+		}
+	}
+	</script>
+</head>
+<body class="android">
+<div class="scroll-content" >
+    <div class="scroll"> 
+        <div class="my-info">
+            <div class="my-info-background-pay" style="background-color:#35CAC3; -webkit-filter:blur(0px)">
+			  <div class="ej-name-b">
+				<a href="zfxq"><img class="fhzj" src="images/dsimg/fh.png" /></a>
+			  </div> 
+			  <div class="ej-name">确认支付</div> 
+			</div>
+        </div>
+		 
+		<div class="my-info">
+            <div class="pay-info-background1" style="background-color:#FFFFFF; -webkit-filter:blur(0px)">
+				<div class="pay-line-zj" >
+					<div class="pay-line-zj-name" >
+						付款金额： 
+					</div> 
+					<div class="pay-line-zj-phone" >
+						￥<label id="je"> </label>
+					</div> 
+				</div>   
+			 </div> 
+        </div>	
+
+		<div class="car-title-qrzf">
+				 请选择支付方式 
+		</div>
+		
+		<div class="aui-list-cells"> 
+              <!--   <a onclick="choice('qb')" class="aui-list-cell1">
+                    <div class="aui-list-cell-fl"><img src="images/dsimg/qb.png"></div>
+                    <div class="aui-list-cell-cn">钱包支付</div>
+					<div id="qb" class="aui-list-cell-fl"><img src="images/dsimg/xuanzhong.png"></div>
+                </a> -->
+                 
+               <div class="news-info b-line"></div>
+                
+                <a onclick="choice('wx')" class="aui-list-cell1">
+                    <div class="aui-list-cell-fl"><img src="images/dsimg/wx.png"></div>
+                    <div class="aui-list-cell-cn">微信支付</div>
+                     <div id="wx" class="aui-list-cell-fl"><img src="images/dsimg/weixuanzhong.png"></div>
+                </a>
+				<div class="news-info b-line"></div>
+                <!-- <a onclick="choice('zfb')" class="aui-list-cell1">
+                    <div class="aui-list-cell-fl"><img src="images/dsimg/zfb.png"></div>
+                    <div class="aui-list-cell-cn">支付宝支付</div> 
+                   <div id="zfb" class="aui-list-cell-fl"><img src="images/dsimg/weixuanzhong.png"></div>
+                </a> -->
+				<div class="form-button">
+					<!-- //qz -->
+					<button onclick="submit()" class="form-submit btn-auto" type="button">确认支付</button>
+				</div>
+				<div class="car-title">
+					<div class="car-logo"><span class="car-v">  </span></div> 
+				</div>
+				<div class="car-title">
+					<div class="car-logo"><span class="car-v">  </span></div> 
+				</div>
+				<div class="car-title">
+					<div class="car-logo"><span class="car-v">  </span></div> 
+				</div>
+				<div class="car-title">
+					<div class="car-logo"><span class="car-v">  </span></div> 
+				</div>
+				<div class="car-title">
+					<div class="car-logo"><span class="car-v">  </span></div> 
+				</div>
+				<div class="car-title">
+					<div class="car-logo"><span class="car-v">  </span></div> 
+				</div>  
+			 
+				 
+				 
+
+            </div>
+			
+    </div>
+	
+	
+	
+	  
+            <div class="car-title">
+				<div class="car-logo"><span class="car-v">  </span></div> 
+			</div>
+			 
+	 
+</div>
+ 
+</body>
+</html>
